@@ -5,13 +5,13 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF0000"
+    android:background="#03A5B3"
     tools:context=".MainActivity">
 
     <Button
         android:id="@+id/button"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="110dp"
         android:layout_marginHorizontal="35dp"
         android:layout_marginTop="100dp"
         android:onClick="openConfigProduto"
@@ -24,7 +24,7 @@
     <Button
         android:id="@+id/button2"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="110dp"
         android:layout_marginHorizontal="35dp"
         android:layout_marginTop="45dp"
         android:text="Relatorio de venda"
@@ -36,7 +36,7 @@
     <Button
         android:id="@+id/button3"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="110dp"
         android:layout_marginHorizontal="35dp"
         android:layout_marginTop="45dp"
         android:text="Vendas"
@@ -56,6 +56,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:title="Controle Facil"
-        app:titleTextAppearance="@style/TextAppearance.AppCompat.Display2"
+        app:titleTextAppearance="@style/TextAppearance.AppCompat.Display1"
         app:titleTextColor="#F4ECEC" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -67,12 +67,24 @@ public class AddProdutoActivity extends AppCompatActivity {
         String svPreco = preco.getText().toString();
         String svQuantidade = quantidade.getText().toString();
 
+        if(svNomeProduto.isBlank()) {
+            Toast.makeText(getApplicationContext(), "Cancelado", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+        if(svPreco.isBlank()) {
+            svPreco = "0";
+        }
+        if(svQuantidade.isBlank()){
+            svQuantidade = "0";
+        }
+
         Intent i = new Intent();
         i.putExtra("svNomeProduto", svNomeProduto);
         i.putExtra("svPreco", svPreco);
         i.putExtra("svQuantidade", svQuantidade);
 
         setResult(RESULT_OK, i);
+        Toast.makeText(getApplicationContext(), "Produto criado", Toast.LENGTH_SHORT).show();
         finish();
     }
 }

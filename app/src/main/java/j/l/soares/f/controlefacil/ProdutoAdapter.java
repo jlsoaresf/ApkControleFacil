@@ -27,9 +27,9 @@ public class ProdutoAdapter extends RecyclerView.Adapter<ProdutoAdapter.ProdutoH
     public void onBindViewHolder(@NonNull ProdutoHolder holder, int position) {
 
         Produto currentProduto = produtos.get(position);
-        holder.textViewProduto.setText("Produto: "+currentProduto.getProduto());
-        holder.textViewPreco.setText("Preço: "+currentProduto.getPreco().toPlainString());
-        holder.textViewQuantidade.setText("Quantidade: "+currentProduto.getQtdEstoque());
+        holder.textViewProduto.setText(currentProduto.getProduto());
+        holder.textViewPreco.setText(currentProduto.getPreco().toPlainString());
+        holder.textViewQuantidade.setText(""+currentProduto.getQtdEstoque());
     }
 
     @Override
@@ -41,6 +41,11 @@ public class ProdutoAdapter extends RecyclerView.Adapter<ProdutoAdapter.ProdutoH
     public void setProdutos(List<Produto> produtos) {
         this.produtos = produtos;
         notifyDataSetChanged();
+    }
+
+    public Produto getProdutos(int position) {
+
+        return  produtos.get(position);
     }
 
     class ProdutoHolder extends RecyclerView.ViewHolder {
