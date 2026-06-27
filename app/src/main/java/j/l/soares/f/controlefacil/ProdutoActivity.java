@@ -31,6 +31,7 @@ public class ProdutoActivity extends AppCompatActivity {
     ProdutoViewModel produtoViewModel;
 
     ActivityResultLauncher<Intent> activityResultLauncherForAddProduto;
+    ActivityResultLauncher<Intent> activityResultLauncherForUpdateProduto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,7 @@ public class ProdutoActivity extends AppCompatActivity {
             return insets;
         });
         registerActivityForAddProduto();
+        registerActivityForUpdateProduto();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Produto");
@@ -79,6 +81,21 @@ public class ProdutoActivity extends AppCompatActivity {
             }
         }).attachToRecyclerView(recyclerView);
 
+        adapter.setOnItemClickListener(new ProdutoAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Produto produto) {
+
+                Intent intent = new Intent(ProdutoActivity.this, UpdateProdutoActivity.class);
+
+                intent.putExtra("id", produto.getId());
+                intent.putExtra("nomeProduto", produto.getProduto());
+                intent.putExtra("preco", produto.getPreco().toString());
+                intent.putExtra("quantidade", String.valueOf(produto.getQtdEstoque()));
+
+                activityResultLauncherForUpdateProduto.launch(intent);
+            }
+        });
+
     }
 
     @Override
@@ -100,6 +117,32 @@ public class ProdutoActivity extends AppCompatActivity {
         }
     }
 
+    public void registerActivityForUpdateProduto() {
+
+        activityResultLauncherForUpdateProduto = registerForActivityResult(new ActivityResultContracts.StartActivityForResult()
+                , new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+
+                        int resultCode = result.getResultCode();
+                        Intent data = result.getData();
+
+                        if(resultCode == RESULT_OK && data != null) {
+
+                            String nomeProduto = data.getStringExtra("upNomeProduto");
+                            BigDecimal preco = NumericConverter.toBigDecimal(data.getStringExtra("upPreco"));
+                            Integer quantidade = Integer.parseInt(data.getStringExtra("upQuantidade"));
+                            int id = data.getIntExtra("pId", -1);
+                            Produto produto = new Produto(nomeProduto, preco, quantidade);
+                            produto.setId(id);
+                            produtoViewModel.update(produto);
+
+                        }
+
+                    }
+                });
+
+    }
     public void registerActivityForAddProduto() {
         activityResultLauncherForAddProduto = registerForActivityResult(new ActivityResultContracts.StartActivityForResult()
                 , new ActivityResultCallback<ActivityResult>() {

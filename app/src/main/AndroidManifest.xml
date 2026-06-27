@@ -12,9 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ControleFacil">
         <activity
+            android:name=".UpdateProdutoActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddProdutoActivity"
             android:exported="false"
-            android:parentActivityName=".ProdutoActivity"/>
+            android:parentActivityName=".ProdutoActivity" />
         <activity
             android:name=".ProdutoActivity"
             android:exported="false" />
